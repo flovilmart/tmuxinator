@@ -21,6 +21,10 @@ module Tmuxinator
         ENV["HOME"] + "/.tmuxinator"
       end
 
+      def options_file
+        directory + ".yml"
+      end
+
       # ~/.config/tmuxinator unless $XDG_CONFIG_HOME has been configured to use
       # a custom value. (e.g. if $XDG_CONFIG_HOME is set to ~/my-config, the
       # return value will be ~/my-config/tmuxinator)
@@ -42,6 +46,13 @@ module Tmuxinator
 
       def default
         "#{directory}/default.yml"
+      end
+
+      def options 
+        unless exists?(path: options_file) 
+          return 
+        end
+        YAML.safe_load(File.read(options_file), [], [], true)
       end
 
       def default?
