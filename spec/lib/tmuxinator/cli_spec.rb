@@ -98,7 +98,7 @@ describe Tmuxinator::Cli do
           it "should call #start" do
             instance = instance_double(cli)
             expect(cli).to receive(:new).and_return(instance)
-            expect(instance).to receive(:start).with(*args)
+            expect(instance).to receive(:start).with(*args, [])
             subject
           end
         end
@@ -194,6 +194,7 @@ describe Tmuxinator::Cli do
                     edit
                     open
                     start
+                    append
                     stop
                     local
                     debug
